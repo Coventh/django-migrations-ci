@@ -44,9 +44,6 @@ It works with `pytest-django` too as a plugin:
 pytest --migrateci --reuse-db
 ```
 
-The recommended way to work with it is configuring default [pytest `addopts`](https://docs.pytest.org/en/7.1.x/example/simple.html#how-to-change-command-line-options-defaults) with `--migrateci --reuse-db` to run without recreating database. When you want to recreate, run pytest with `--create-db` that has precedence over `--reuse-db`.
-
-
 ## Parallel tests
 
 ```shell
@@ -96,7 +93,6 @@ If no storage is defined, it defaults to `~/.migrateci` to make it easy to work 
 The [`pytest-django`](https://pypi.org/project/pytest-django) package use custom test database names.
 
 If you use it and don´t change their default fixtures, just use `MIGRATECI_PYTEST=True`.
-
 
 #### `MIGRATECI_PARALLEL=None`
 
@@ -153,9 +149,9 @@ In the past, I tried to optimize that on Django core, but learnt it's a [running
 
 ## Supported databases
 
-* mysql
-* postgresql
-* sqlite3
+- mysql
+- postgresql
+- sqlite3
 
 Django default run sqlite3 tests as in memory database and does not work because
 `migrateci` runs in a different process. Add a test database name to settings,
@@ -168,11 +164,11 @@ Django supports oracle, but the dump function is not implemented here.
 Django test framework has a `--parallel N` flag to test with N parallel processes,
 naming databases from 1 to N.
 
-* On sqlite3, a `db.sqlite3` generate `db_N.sqlite3` files.
-* On other databases, a `db` generate `test_db_N`.
+- On sqlite3, a `db.sqlite3` generate `db_N.sqlite3` files.
+- On other databases, a `db` generate `test_db_N`.
 
 Pytest `pytest-django` use `pytest-xdist` for parallel support, naming databases
 from 0 to N-1.
 
-* On sqlite3, a `db.sqlite3` generate `db.sqlite3_gwN` files.
-* On other databases, a `db` generate `test_db_gwN`.
+- On sqlite3, a `db.sqlite3` generate `db.sqlite3_gwN` files.
+- On other databases, a `db` generate `test_db_gwN`.
